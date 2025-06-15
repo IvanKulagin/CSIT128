@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+    <input type="text" id="title"><br>
+    <%companies.forEach((element) => {%>
+        <input type="checkbox" class="company" value="<%=element.id%>" checked>
+        <label><%=element.name%></label><br>
+    <%})%>
+    <select id="location">
+        <option value="remote">Remote</option>
+        <option value="on-site" selected>On-site</option>
+    </select>
+    <div id="content"></div>
+    <script>
+        function search() {
+            fetch("/api/internships", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: document.getElementById("title").value,
+                    companies: Array.from(document.querySelectorAll(".company:checked"), item => item.value),
+                    location: document.getElementById("location").value
+                })
+            })
+            .then(response => response.json())
+            .then(json => {
+                div = document.getElementById("content")
+                div.innerHTML = ""
+                json.forEach((element) => {
+                    div.innerHTML += element.title + " "
+                    if (element.application !== null) {
+                        div.innerHTML += element.status !== null ? element.status : "On review"
+                    }
+                    else {
+                        div.innerHTML += `<a href="/student/internship/${element.id}">Apply</a>`
+                    }
+                    div.innerHTML += "<br>"
+                })
+            })
+        }
+        document.addEventListener("DOMContentLoaded", search)
+        Array.from(document.querySelectorAll(".company"), item => item.addEventListener("change", search)),
+        document.getElementById("title").addEventListener("input", search)
+        document.getElementById("location").addEventListener("change", search)
+    </script>
+</body>
+</html>

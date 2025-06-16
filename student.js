@@ -25,7 +25,7 @@ router.get("/", isStudent, (req, res) => {
 
 router.route("/login")
     .get((req, res) => {
-        res.sendFile(__dirname + "/login.html")
+        res.render("login")
     })
     .post(express.urlencoded(), (req, res) => {
         pool.query("select * from student where username = ? and password = ?", [req.body.username, req.body.password], (err, result) => {

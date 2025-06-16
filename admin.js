@@ -25,7 +25,7 @@ router.get("/", isAdmin, (req, res) => {
 
 router.route("/login")
     .get((req, res) => {
-        res.sendFile(__dirname + "/login.html")
+        res.render("login")
     })
     .post(express.urlencoded(), (req, res) => {
         pool.query("select * from company where username = ? and password = ?", [req.body.username, req.body.password], (err, result) => {
@@ -71,7 +71,7 @@ router.get("/internship", isAdmin, (req, res) => {
 
 router.route("internship/create")
     .get(isAdmin, (req, res) => {
-        res.sendFile(__dirname + "/create.html")
+        res.render("create")
     })
     .post(express.urlencoded(), (req, res) => {
         console.log(req.body)

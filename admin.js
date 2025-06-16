@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const router = express.Router();
 
-var pool = mysql.createPool({
+const pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: process.env.MYSQL_PASS,
@@ -75,7 +75,7 @@ router.route("internship/create")
     })
     .post(express.urlencoded(), (req, res) => {
         console.log(req.body)
-        var keys = ["title", "location", "skills", "salary", "duration", "deadline"]
+        const keys = ["title", "location", "skills", "salary", "duration", "deadline"]
         pool.query("insert into internship value (null, ?, ?, ?, ?, ?, ?, ?)", [req.session.user].concat(keys.map(key => req.body[key])), (err, result) => {
             if (err) throw err
             console.log(result)
@@ -101,8 +101,8 @@ router.route("/internship/edit/:id")
     })
     .post(express.urlencoded(), (req, res) => {
         console.log(req.body)
-        var keys = ["title", "location", "skills", "salary", "duration", "deadline"]
-        var query = `update internship set
+        const keys = ["title", "location", "skills", "salary", "duration", "deadline"]
+        const query = `update internship set
                      title = ?,
                      location = ?,
                      skills = ?,

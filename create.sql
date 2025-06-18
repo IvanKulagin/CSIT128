@@ -52,7 +52,7 @@ insert into internship values (null, 1, "Internship 2", "Location 1", "on-site",
 insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
 insert into internship values (null, 2, "Internship 3", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
 
-insert into student values (null, "John", "user", "");
+insert into student values (null, "John", "user@test.com", "123");
 insert into student values (null, "Bob", "user2", "");
 
 insert into application values (null, 1, 1, "test.pdf", "Comment", null);

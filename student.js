@@ -23,34 +23,42 @@ router.get("/", isStudent, (req, res) => {
     })
 })
 
+router.route("/register")
+    .get((req, res) => {
+        res.send("reg")
+    })
+
 router.route("/login")
     .get((req, res) => {
-        res.render("login")
+        res.render("login_student")
     })
     .post(express.urlencoded(), (req, res) => {
-        pool.query("select * from student where username = ? and password = ?", [req.body.username, req.body.password], (err, result) => {
+        pool.query("select * from student where email = ? and password = ?", [req.body.email, req.body.password], (err, result) => {
             if (err) throw err
-            console.log(result)
             if (result.length != 0) {
                 req.session.regenerate((err) => {
                     if (err) throw err
                     req.session.user = result[0].id
                     req.session.save((err) => {
                         if (err) throw err
-                        res.redirect("/student")
+                        res.redirect("/student/internship")
                     })
                 })
             }
             else {
-                res.redirect("/admin/login")
+                res.redirect("/student/login")
             }
         })
     })
 
+router.get("/logout", (req, res) => {
+    res.send("logout")
+})
+
 router.get("/internship", isStudent, (req, res) => {
     pool.query("select * from company", (err, result) => {
         if (err) throw err
-        res.render("search", {
+        res.render("student_dashboard", {
             companies: result
         })
     })

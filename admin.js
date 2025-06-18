@@ -21,7 +21,6 @@ router.get("/", isAdmin, (req, res) => {
     pool.query("select * from company where id = ?", [req.session.user], (err, result) => {
         if (err) throw err
         res.send("<p>Welcome " + result[0].name + "</p><br><a href=\"/admin/internship\">Internships</a>")
-        //res.render("company_dashboard")
     })
 })
 

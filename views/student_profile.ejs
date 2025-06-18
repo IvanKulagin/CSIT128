@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <h1>Internship Management</h1>
+    </div>
+    <div class="nav-div">
+      <nav>
+        <a href="student_dashboard.html">Dashboard</a>
+        <a href="index.html">Log out</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="profile-container">
+    <h2>Student Profile</h2>
+
+    <form action="student_dashboard.html">
+      <div class="form-group">
+        <label for="student-name">Full Name</label>
+        <input type="text" id="student-name" name="student-name" value="Jane Doe" required />
+      </div>
+
+      <div class="form-group">
+        <label for="student-email">Email</label>
+        <input type="email" id="student-email" name="student-email" value="jane@example.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="student-phone">Phone</label>
+        <input type="tel" id="student-phone" name="student-phone" value="+971 50 123-45-67" />
+      </div>
+
+      <div class="form-group">
+        <label for="student-university">University</label>
+        <input type="text" id="student-university" name="student-university" value="University of Wollongong" />
+      </div>
+
+      <div class="form-group">
+        <label for="student-major">Major / Field of Study</label>
+        <input type="text" id="student-major" name="student-major" value="Computer Science" />
+      </div>
+
+      <div class="form-group">
+        <label for="student-year">Year</label>
+        <select id="student-year" name="student-year">
+          <option value="1st" selected>1st Year</option>
+          <option value="2nd">2nd Year</option>
+          <option value="3rd">3rd Year</option>
+          <option value="4th">4th Year</option>
+          <option value="graduate">Graduate</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="student-bio">Short Bio</label>
+        <textarea id="student-bio" name="student-bio" rows="4">best in csit128</textarea>
+      </div>
+
+      <button type="submit" class="save-button">Save Changes</button>
+    </form>
+  </div>
+</body>
+
+</html>

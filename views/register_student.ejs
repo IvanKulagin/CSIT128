@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <h1>Internship Management</h1>
+    </div>
+    <div class="nav-div">
+      <nav>
+        <a href="login_company.html">Company Login</a>
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <h2>Student Registration</h2>
+
+    <form action="student_dashboard.html">
+      <div class="form-group">
+        <label for="student-name">Full Name</label>
+        <input type="text" id="student-name" name="student-name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="student-email">Email</label>
+        <input type="email" id="student-email" name="student-email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="student-password">Create Password</label>
+        <input type="password" id="student-password" name="student-password" required />
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required />
+      </div>
+
+      <button type="submit" class="login-button">Register</button>
+    </form>
+
+    <div class="footer-text">
+      Already have an account? <a href="login_student.html">Login here</a>
+    </div>
+  </div>
+</body>
+
+</html>

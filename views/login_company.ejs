@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="title">
+      <h1>Internship Management</h1>
+    </div>
+
+    <div class="nav-div">
+      <nav>
+        <a href="/student/login">Student Login</a>
+        <a href="/">Home</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <h2>Company Login</h2>
+
+    <form method="post">
+      <div class="form-group">
+        <label for="email">Company Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <button type="submit" class="login-button">Login</button>
+    </form>
+
+    <div class="footer-text">
+      Don't have an account? <a href="/admin/register">Register here</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

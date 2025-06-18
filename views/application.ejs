@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Edit</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Review</title>
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
+
 <body>
-    <div>
-        <%=internship%>
+    <div class="header">
+        <div class="title">
+            <h1>Internship Management</h1>
+        </div>
+        <div class="nav-div">
+            <nav>
+                <a href="/admin/internship">Dashboard</a>
+                <a href="company_profile.html">Profile</a>
+                <a href="/">Home</a>
+            </nav>
+        </div>
     </div>
-    <form enctype="multipart/form-data" method="post">
-        <input type="text" name="comment"><br>
-        <input type="file" name="portfolio"><br>
-        <input type="submit" value="Apply">
-    </form>
+
+    <div class="application-container">
+        <h2>Application: <%=name%></h2>
+
+        <div class="application-section">
+            <label>Email:</label>
+            <p><%=email%></p>
+        </div>
+
+        <div class="application-section">
+            <label>University:</label>
+            <p>University of Example</p>
+        </div>
+
+        <div class="application-section">
+            <label>Degree Program:</label>
+            <p>Bachelor of Computer Science</p>
+        </div>
+
+        <div class="application-section">
+            <label>Description</label>
+            <p>description here</p>
+        </div>
+
+        <div class="application-section">
+            <label>Attached CV:</label>
+            <a href="/api/download/<%=portfolio%>" class="download-link" download>Download CV (PDF)</a>
+        </div>
+
+        <div class="application-button-group">
+            <form method="post">
+                <button type="submit" name="action" value="accepted" class="application-btn-accept">Accept</button>
+                <button type="submit" name="action" value="rejected"  class="application-btn-reject">Reject</button>
+                <button type="submit" name="action" value="shortlisted"  class="application-btn-shortlist">Shortlist</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

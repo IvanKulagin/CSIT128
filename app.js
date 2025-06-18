@@ -2,6 +2,7 @@ const express = require("express")
 const session = require("express-session")
 const mysql = require("mysql")
 const formidable = require("formidable")
+const path = require("path")
 require("dotenv").config()
 
 const admin = require("./admin")
@@ -26,19 +27,18 @@ app.use(session({
     saveUninitialized: true
 }))
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", (req, res) => {
-    res.send("Welcome!")
+    res.render("index")
 })
 
 app.use("/admin", admin)
 
 app.use("/student", student)
 
-app.get("/api/applications/:id", (req, res) => {
-    pool.query("select * from application where id = ?", [req.params.id], (err, result) => {
-        if (err) throw err
-        res.download(__dirname + "/uploads/" + result[0].portfolio) //set a nice name or save original name in the table
-    })
+app.get("/api/download/:file", (req, res) => {
+    res.download(__dirname + "/uploads/" + req.params.file) //set a nice name or save original name in the table
 })
 
 app.post("/api/internships", express.json(), (req, res) => { //fails if array is empty

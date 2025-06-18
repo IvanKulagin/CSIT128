@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit</title>
+</head>
+<body>
+    <form method="POST">
+        <input id="title" name="title" type="text" value="<%=title%>"><br>
+        <select id="location" name="location">
+            <option value="remote" <% if (location == "remote") {%>selected<%}%>>Remote</option>
+            <option value="on-site" <% if (location == "on-site") {%>selected<%}%>>On-site</option>
+        </select><br>
+        <input id="skills" name="skills" type="text" value="<%=skills%>"><br>
+        <input id="salary" name="salary" type="number" value="<%=salary%>"><br>
+        <input id="duration" name="duration" type="text" value="<%=duration%>"><br>
+        <input id="deadline" name="deadline" type="date" value="<%=deadline%>"><br>
+        <input type="submit" value="Save">
+    </form>
+    <button id="delete">Delete</button>
+    <script>
+        document.getElementById("delete").addEventListener("click", (event) => {
+            if (confirm("Are you sure?")) {
+                fetch("/admin/internship/delete", {
+                    method: "POST",
+                    redirect: "follow",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams({
+                        id: "<%=id%>"
+                    })
+                })
+                .then(response => {
+                    window.location.href = response.url
+                })
+            }
+        })
+    </script>
+</body>
+</html>

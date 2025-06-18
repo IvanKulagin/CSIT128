@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Registration</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="title">
+        <h1>Internship Management</h1>
+      </div>
+      <div class="nav-div">
+        <nav>
+          <a href="login_student.html">Student Login</a>
+          <a href="index.html">Home</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="login-container">
+      <h2>Company Registration</h2>
+
+      <form method="post">
+        <div class="form-group">
+          <label for="name">Company Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Company Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Create Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="login-button">Register</button>
+      </form>
+
+      <div class="footer-text">
+        Already have an account? <a href="login_company.html">Login here</a>
+      </div>
+    </div>
+  </body>
+</html>

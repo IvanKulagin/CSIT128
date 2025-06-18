@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply for Internship</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <h1>Internship Management</h1>
+    </div>
+    <div class="nav-div">
+      <nav>
+        <a href="student_dashboard.html">Dashboard</a>
+        <a href="student_profile.html">Profile</a>
+        <a href="index.html">Log out</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="application-form-container">
+    <h2>Apply for Frontend Developer Internship</h2>
+    <form action="student_dashboard.html" enctype="multipart/form-data">
+      <div class="application-form-group">
+        <label for="cv">Upload Your CV</label>
+        <input type="file" id="cv" name="cv" accept=".pdf, .doc, .docx" required />
+      </div>
+
+      <div class="application-form-group">
+        <label for="about">Tell us about yourself</label>
+        <textarea id="about" name="about" placeholder="Describe your background, motivation, and relevant experience..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-button">Submit Application</button>
+    </form>
+  </div>
+</body>
+
+</html>

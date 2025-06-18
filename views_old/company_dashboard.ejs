@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="title">
+      <h1>Internship Management</h1>
+    </div>
+    <div class="nav-div">
+      <nav>
+        <a href="company_profile.html">Company Profile</a>
+        <a href="index.html">Log out</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search internships..." oninput="filterInternships()" />
+    </div>
+
+    <div class="internships-grid" id="internshipsContainer">
+      <!-- Example Internship Cards -->
+      <div class="internship-card">
+        <h3>Frontend Developer</h3>
+        <p>Location: Remote</p>
+        <p>Duration: 3 Months</p>
+      </div>
+
+      <div class="internship-card">
+        <h3>Backend Engineer</h3>
+        <p>Location: On-site (NYC)</p>
+        <p>Duration: 6 Months</p>
+      </div>
+
+      <div class="internship-card">
+        <h3>Marketing Intern</h3>
+        <p>Location: Hybrid</p>
+        <p>Duration: 2 Months</p>
+      </div>
+
+      <div class="internship-card">
+        <h3>UI/UX Designer</h3>
+        <p>Location: Remote</p>
+        <p>Duration: 4 Months</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

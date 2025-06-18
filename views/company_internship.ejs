@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internship Details</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>Internship Management</h1>
+        </div>
+        <div class="nav-div">
+            <nav>
+                <a href="/admin/internship">Dashboard</a>
+                <a href="company_profile.html">Profile</a>
+                <a href="/">Home</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="detail-container">
+        <h2><%=title%></h2>
+
+        <div class="info-block">
+            <label>Location:</label>
+            <p><%=location%></p>
+        </div>
+
+        <div class="info-block">
+            <label>Duration:</label>
+            <p><%=duration%> Months</p>
+        </div>
+
+        <div class="info-block">
+            <label>Type:</label>
+            <p><%=type%></p>
+        </div>
+
+        <div class="info-block">
+            <label>Required Skills:</label>
+            <p><%=skills%></p>
+        </div>
+
+        <div class="info-block">
+            <label>Description:</label>
+            <p>description here</p>
+        </div>
+
+        <div class="action-buttons">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+        </div>
+
+        <div class="students-title">Students Applied:</div>
+        <ul class="students-list">
+            <%applications.forEach((application) => {%>
+            <li><a href="/admin/application/<%=application.id%>"><%=application.name%></a></li>
+            <%})%>
+        </ul>
+    </div>
+</body>
+</html>

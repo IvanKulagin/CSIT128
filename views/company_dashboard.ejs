@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>Internship Management</h1>
+        </div>
+        <div class="nav-div">
+            <nav>
+                <a href="/admin/profile">Company Profile</a>
+                <a href="/admin/logout">Log out</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="search-bar">
+            <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search internships..."
+                    oninput="filterInternships()"
+                    />
+        </div>
+
+        <div class="create-internship-container">
+            <form action="create_internship.html">
+                <button class="create-internship-button">Create Internship</button>
+            </form>
+        </div>
+
+        <div class="internships-grid" id="internshipsContainer">
+            <%internships.forEach((internship) => {%>
+            <a href="/admin/internship/edit/<%=internship.id%>">
+                <div class="internship-card">
+                    <h3><%=internship.title%></h3>
+                    <p>Location: <%=internship.location%></p>
+                    <p>Duration: <%=internship.duration%> Months</p>
+                </div>
+            </a>
+            <%})%>
+        </div>
+    </div>
+</body>
+</html>

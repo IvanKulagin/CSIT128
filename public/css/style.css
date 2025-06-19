@@ -1,632 +1,632 @@
 /* General Styles */
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f4f4f4;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
 }
 
 /* Header */
 .header {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0px 1px 15px 1px rgb(208, 207, 207);
-  height: 75px;
-  margin-bottom: 60px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 1px 15px 1px rgb(208, 207, 207);
+    height: 75px;
+    margin-bottom: 60px;
 }
 
 .title {
-  padding-left: 30px;
+    padding-left: 30px;
 }
 
 .title h1 {
-  font-size: 35px;
-  margin: 0;
+    font-size: 35px;
+    margin: 0;
 }
 
 .nav-div {
-  padding-right: 30px;
-  width: 500px;
-  height: 50px;
+    padding-right: 30px;
+    width: 500px;
+    height: 50px;
 }
 
 .nav-div nav {
-  font-size: 20px;
-  display: flex;
-  justify-content: right;
-  gap: 20px;
-  align-items: center;
-  height: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: right;
+    gap: 20px;
+    align-items: center;
+    height: 100%;
 }
 
 .nav-div nav a {
-  text-decoration: none;
-  color: #007bff;
+    text-decoration: none;
+    color: #007bff;
 }
 
 .nav-div nav a:hover {
-  text-decoration: underline;
-  opacity: 70%;
+    text-decoration: underline;
+    opacity: 70%;
 }
 
 /* Homepage Styles */
 .welcome {
-  margin: auto;
-  width: 900px;
-  background-color: white;
-  height: 250px;
-  border-radius: 20px;
-  padding: 20px;
-  color: #333333;
-  box-shadow: 0px 1px 15px 1px rgb(225, 225, 225);
+    margin: auto;
+    width: 900px;
+    background-color: white;
+    height: 250px;
+    border-radius: 20px;
+    padding: 20px;
+    color: #333333;
+    box-shadow: 0px 1px 15px 1px rgb(225, 225, 225);
 }
 
 .welcome p.slogan {
-  font-size: 15px;
-  opacity: 70%;
+    font-size: 15px;
+    opacity: 70%;
 }
 
 .welcome p {
-  font-size: 30px;
-  text-align: center;
-  font-weight: bold;
-  margin: 0;
-  margin-bottom: 20px;
-  margin-top: 20px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .side-actions {
-  margin-top: 35px;
-  display: flex;
-  justify-content: space-around;
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .cmpstu {
-  border-radius: 10px;
-  width: 400px;
-  height: 100px;
-  background-color: #fafafa;
-  text-align: center;
-  box-shadow: 0px 1px 15px 1px rgb(208, 207, 207);
+    border-radius: 10px;
+    width: 400px;
+    height: 100px;
+    background-color: #fafafa;
+    text-align: center;
+    box-shadow: 0px 1px 15px 1px rgb(208, 207, 207);
 }
 
 .cmpstu p {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .cmpstu a {
-  text-decoration: none;
-  color: #007bff;
+    text-decoration: none;
+    color: #007bff;
 }
 
 .cmpstu a:hover {
-  text-decoration: underline;
-  opacity: 70%;
+    text-decoration: underline;
+    opacity: 70%;
 }
 
 /* Company Login Styles */
 .login-container {
-  background-color: white;
-  width: 400px;
-  margin: auto;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0px 1px 15px 1px rgb(225, 225, 225);
+    background-color: white;
+    width: 400px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 1px 15px 1px rgb(225, 225, 225);
 }
 
 .login-container h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333333;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333333;
 }
 
 .form-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #333333;
+    display: block;
+    margin-bottom: 8px;
+    color: #333333;
 }
 
 .form-group input,
 .form-group textarea {
-  width: 95%;
-  padding: 9px;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  font-size: 16px;
+    width: 95%;
+    padding: 9px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
 }
 
 .form-group select {
-  width: 98%;
-  padding: 9px;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  font-size: 16px;
+    width: 98%;
+    padding: 9px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
 }
 
 .form-group input:focus {
-  outline: none;
-  border-color: #007bff;
+    outline: none;
+    border-color: #007bff;
 }
 
 .login-button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .login-button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .footer-text {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 14px;
-  color: #666666;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #666666;
 }
 
 .footer-text a {
-  color: #007bff;
-  text-decoration: none;
+    color: #007bff;
+    text-decoration: none;
 }
 
 .footer-text a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* company dashboard styles */
 
 .dashboard-container {
-  padding: 20px;
+    padding: 20px;
 }
 
 .dashboard-content {
-  display: flex;
-  padding: 20px;
-  gap: 30px;
+    display: flex;
+    padding: 20px;
+    gap: 30px;
 }
 
 .filter-sidebar {
-  width: 250px;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-  height: fit-content;
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
 }
 
 .filter-sidebar h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
 }
 
 .filter-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .filter-group label {
-  display: block;
-  margin: 8px 0;
-  font-size: 14px;
-  cursor: pointer;
+    display: block;
+    margin: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .internships-section {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .search-bar {
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .search-bar input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
 .internships-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .internships-grid a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .internship-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
-  transition: box-shadow 0.3s ease;
-  cursor: pointer;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .internship-card:hover {
-  box-shadow: 0px 1px 20px 1px rgba(150, 150, 150, 0.4);
+    box-shadow: 0px 1px 20px 1px rgba(150, 150, 150, 0.4);
 }
 
 .internship-card h3 {
-  margin-top: 0;
-  font-size: 22px;
-  color: #007bff;
+    margin-top: 0;
+    font-size: 22px;
+    color: #007bff;
 }
 
 .internship-card p {
-  margin: 8px 0;
-  font-size: 16px;
-  color: #444;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #444;
 }
 
 .profile-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 16px;
-  cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .profile-button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .create-internship-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-  padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding-right: 10px;
 }
 
 .create-internship-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
 }
 
 .create-internship-button:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 /* styles for company profile */
 
 .profile-container {
-  width: 90%;
-  max-width: 700px;
-  margin: auto;
-  background-color: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
 }
 
 .profile-container h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .save-button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .save-button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /** styles for create_internshop.html */
 
 .form-container {
-  width: 90%;
-  max-width: 800px;
-  margin: auto;
-  background-color: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
 }
 
 .form-container h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .submit-button {
-  background-color: #007bff;
-  color: white;
-  padding: 12px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /** styles for company_internship.html */
 
 .detail-container {
-  width: 90%;
-  max-width: 900px;
-  margin: auto;
-  background-color: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
-  margin-bottom: 50px;
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0px 1px 15px 1px rgba(208, 207, 207, 0.6);
+    margin-bottom: 50px;
 }
 
 .detail-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
 .info-block {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .info-block label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #333;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #333;
 }
 
 .info-block p {
-  margin: 0;
-  font-size: 16px;
-  color: #555;
+    margin: 0;
+    font-size: 16px;
+    color: #555;
 }
 
 .action-buttons {
-  display: flex;
-  gap: 15px;
-  margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
 }
 
 .action-buttons a{
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: white;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
 }
 
 .edit-btn {
-  background-color: #007bff;
+    background-color: #007bff;
 }
 
 .edit-btn:hover {
-  background-color: #0069d9;
+    background-color: #0069d9;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+    background-color: #dc3545;
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+    background-color: #c82333;
 }
 
 .students-title {
-  margin-top: 40px;
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 15px;
+    margin-top: 40px;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
 .students-list {
-  list-style: none;
-  padding-left: 0;
+    list-style: none;
+    padding-left: 0;
 }
 
 .students-list li {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .students-list a {
-  text-decoration: none;
-  color: #007bff;
-  font-size: 16px;
-  cursor: pointer;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .students-list a:hover {
-  text-decoration: underline;
-  opacity: 0.8;
+    text-decoration: underline;
+    opacity: 0.8;
 }
 
 /** styles for application.html */
 
 .application-container {
-  width: 90%;
-  max-width: 800px;
-  margin: 50px auto;
-  background-color: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0px 1px 15px rgba(208, 207, 207, 0.6);
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0px 1px 15px rgba(208, 207, 207, 0.6);
 }
 
 .application-section {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .application-section label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 .application-section p {
-  margin: 0;
-  color: #555;
+    margin: 0;
+    color: #555;
 }
 
 .download-link {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #007bff;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
 }
 
 .download-link:hover {
-  text-decoration: underline;
-  opacity: 0.8;
+    text-decoration: underline;
+    opacity: 0.8;
 }
 
 .application-button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
 }
 
 .application-button-group button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: white;
-  transition: background-color 0.2s ease;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.2s ease;
 }
 
 .application-btn-accept {
-  background-color: #28a745;
+    background-color: #28a745;
 }
 
 .application-btn-reject {
-  background-color: #dc3545;
+    background-color: #dc3545;
 }
 
 .application-btn-shortlist {
-  background-color: #6c757d;
+    background-color: #6c757d;
 }
 
 .application-btn-accept:hover {
-  background-color: #218838;
+    background-color: #218838;
 }
 
 .application-btn-reject:hover {
-  background-color: #c82333;
+    background-color: #c82333;
 }
 
 .application-btn-shortlist:hover {
-  background-color: #5a6268;
+    background-color: #5a6268;
 }
 
 /** styles for student_dashboard.html  */
 
 .dashboard-content {
-  display: flex;
-  padding: 20px;
-  gap: 30px;
+    display: flex;
+    padding: 20px;
+    gap: 30px;
 }
 
 .filter-sidebar {
-  width: 250px;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-  height: fit-content;
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    height: fit-content;
 }
 
 .filter-sidebar h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
 }
 
 .filter-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .filter-group label {
-  display: block;
-  margin: 8px 0;
-  font-size: 14px;
-  cursor: pointer;
+    display: block;
+    margin: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 /** styles for create_applicaiton.html */
 
 .application-form-container {
-  max-width: 700px;
-  margin: 40px auto;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
 }
 
 .application-form-container h2 {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .application-form-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .application-form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .application-form-group input[type="file"],
 .application-form-group textarea {
-  width: 100%;
-  padding: 10px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
 
 .application-form-group textarea {
-  resize: vertical;
-  height: 150px;
+    resize: vertical;
+    height: 150px;
 }

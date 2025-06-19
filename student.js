@@ -73,6 +73,11 @@ router.get("/logout", (req, res) => {
     })
 })
 
+router.route("/profile")
+    .get(isStudent, (req, res) => {
+        res.render("student_profile")
+    })
+
 router.get("/internship", isStudent, (req, res) => {
     pool.query("select * from company", (err, result) => {
         if (err) throw err

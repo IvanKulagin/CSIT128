@@ -73,16 +73,14 @@ router.get("/logout", isAdmin, (req, res) => {
     })
 })
 
+router.route("/profile")
+    .get(isAdmin, (req, res) => {
+        res.render("company_profile")
+    })
+
 router.get("/internship", isAdmin, (req, res) => {
     pool.query("select * from internship where company_id = ?", [req.session.user], (err, result) => {
         if (err) throw err
-        /*
-        var response = ""
-        result.forEach((row) => {
-            response += `${row.title} ${row.salary} <a href="/admin/internship/edit/${row.id}">Edit</a> <a href="/admin/applications/${row.id}">Applications</a><br>`
-        })
-        res.send(response)
-        */
         res.render("company_dashboard", {
             internships: result
         })

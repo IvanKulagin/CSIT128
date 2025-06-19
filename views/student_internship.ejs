@@ -1,62 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Internship Details</title>
-  <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internship Details</title>
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-  <div class="header">
-    <div class="title">
-      <h1>Internship Management</h1>
-    </div>
-    <div class="nav-div">
-      <nav>
-        <a href="/student/internship">Dashboard</a>
-        <a href="student_profile.html">Profile</a>
-        <a href="/">Log out</a>
-      </nav>
-    </div>
-  </div>
-
-  <div class="detail-container">
-      <h2><%=title%></h2>
-
-    <div class="info-block">
-      <label>Company:</label>
-      <p><%=name%></p>
+    <div class="header">
+        <div class="title">
+            <h1>Internship Management</h1>
+        </div>
+        <div class="nav-div">
+            <nav>
+                <a href="/student/internship">Dashboard</a>
+                <a href="/student/profile">Profile</a>
+                <a href="/">Log out</a>
+            </nav>
+        </div>
     </div>
 
-    <div class="info-block">
-      <label>Location:</label>
-      <p><%=location%></p>
-    </div>
+    <div class="detail-container">
+        <h2><%=title%></h2>
 
-    <div class="info-block">
-      <label>Duration:</label>
-      <p><%=duration%> Months</p>
-    </div>
+        <div class="info-block">
+            <label>Company:</label>
+            <p><%=name%></p>
+        </div>
 
-    <div class="info-block">
-      <label>Type:</label>
-      <p><%=type%></p>
-    </div>
+        <div class="info-block">
+            <label>Location:</label>
+            <p><%=location%></p>
+        </div>
 
-    <div class="info-block">
-      <label>Required Skills:</label>
-      <p><%=skills%></p>
-    </div>
+        <div class="info-block">
+            <label>Duration:</label>
+            <p><%=duration%> Months</p>
+        </div>
 
-    <div class="info-block">
-      <label>Description:</label>
-      <p>not set</p>
-    </div>
+        <div class="info-block">
+            <label>Type:</label>
+            <p><%=type%></p>
+        </div>
 
-    <a href="/student/internship/<%=id%>/apply" class="submit-button">Apply for Internship</a>
-  </div>
+        <div class="info-block">
+            <label>Required Skills:</label>
+            <p><%=skills%></p>
+        </div>
+
+        <div class="info-block">
+            <label>Description:</label>
+            <p>not set</p>
+        </div>
+
+        <a href="/student/internship/<%=id%>/apply" class="submit-button">Apply for Internship</a>
+    </div>
 </body>
-
 </html>

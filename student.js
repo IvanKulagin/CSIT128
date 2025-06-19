@@ -27,7 +27,16 @@ router.get("/", isStudent, (req, res) => {
 
 router.route("/register")
     .get((req, res) => {
-        res.send("reg")
+        res.render("register_student")
+    })
+    .post(express.urlencoded(), (req, res) => {
+        console.log(req.body)
+        const keys = ["name", "email", "password"]
+        pool.query("insert into student values (null, ?, ?, ?)", keys.map(key => req.body[key]), (err, result) => {
+            if (err) throw err
+            console.log(result)
+            res.redirect("/student/login") //make autologin
+        })
     })
 
 router.route("/login")

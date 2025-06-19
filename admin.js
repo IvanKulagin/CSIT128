@@ -89,43 +89,49 @@ router.get("/internship", isAdmin, (req, res) => {
     })
 })
 
-router.route("internship/create")
+router.route("/internship/create")
     .get(isAdmin, (req, res) => {
-        res.render("create")
+        res.render("create_internship")
     })
     .post(express.urlencoded(), (req, res) => {
         console.log(req.body)
-        const keys = ["title", "location", "skills", "salary", "duration", "deadline"]
-        pool.query("insert into internship value (null, ?, ?, ?, ?, ?, ?, ?)", [req.session.user].concat(keys.map(key => req.body[key])), (err, result) => {
+        const keys = ["title", "location", "type", "skills", "duration"]
+        pool.query("insert into internship (company_id, title, location, type, skills, duration) value (?, ?, ?, ?, ?, ?)", [req.session.user].concat(keys.map(key => req.body[key])), (err, result) => {
             if (err) throw err
             console.log(result)
         })
         res.redirect("/admin/internship")
     })
 
-router.route("/internship/edit/:id")
+router.get("/internship/:id", isAdmin, (req, res) => {
+    pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => { //no check for company_id
+        if (err) throw err
+        pool.query("select application.*, student.name from application join student on student_id = student.id where internship_id = ?", [req.params.id], (err, applications) => {
+            console.log(applications)
+            res.render("company_internship", {
+                ...internship[0],
+                applications: applications
+            })
+        })
+    })
+})
+
+router.route("/internship/:id/edit")
     .get(isAdmin, (req, res) => {
         pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => { //no check for company_id
             if (err) throw err
-            pool.query("select application.*, student.name from application join student on student_id = student.id where internship_id = ?", [req.params.id], (err, applications) => {
-                console.log(applications)
-                res.render("company_internship", {
-                    ...internship[0],
-                    applications: applications
-                })
-            })
+            res.render("edit_internship", internship[0])
         })
     })
     .post(express.urlencoded(), (req, res) => {
         console.log(req.body)
-        const keys = ["title", "location", "skills", "salary", "duration", "deadline"]
+        const keys = ["title", "location", "type", "skills", "duration"]
         const query = `update internship set
                      title = ?,
                      location = ?,
+                     type = ?,
                      skills = ?,
-                     salary = ?,
-                     duration = ?,
-                     deadline = ?
+                     duration = ?
                      where id = ?`
         pool.query(query, keys.map(key => req.body[key]).concat(req.params.id), (err, result) => {
             if (err) throw err
@@ -134,9 +140,8 @@ router.route("/internship/edit/:id")
         })
     })
 
-router.post("/internship/delete", express.urlencoded(), (req, res) => {
-    console.log(req.body)
-    pool.query("delete from internship where id = ?", [req.body.id], (err, result) => {
+router.get("/internship/:id/delete", isAdmin, (req, res) => {
+    pool.query("delete from internship where id = ?", [req.params.id], (err, result) => {
         if (err) throw err
         console.log(result)
         res.redirect("/admin/internship")

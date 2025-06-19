@@ -31,14 +31,12 @@
         </div>
 
         <div class="create-internship-container">
-            <form action="create_internship.html">
-                <button class="create-internship-button">Create Internship</button>
-            </form>
+            <a href="/admin/internship/create" class="create-internship-button">Create Internship</a>
         </div>
 
         <div class="internships-grid" id="internshipsContainer">
             <%internships.forEach((internship) => {%>
-            <a href="/admin/internship/edit/<%=internship.id%>">
+            <a href="/admin/internship/<%=internship.id%>">
                 <div class="internship-card">
                     <h3><%=internship.title%></h3>
                     <p>Location: <%=internship.location%></p>

@@ -14,7 +14,7 @@ create table internship (
 	company_id int,
 	title text,
 	location text,
-	type enum("remote", "on-site"),
+	type enum("Remote", "On-site"),
 	skills text,
 	salary decimal(10, 2),
 	duration int,
@@ -43,14 +43,14 @@ create table application ( #make student_id and intership_id combination unique
 insert into company values (null, "Company 1", "admin@test.com", "123");
 insert into company values (null, "Company 2", "admin2", "");
 
-insert into internship values (null, 1, "Internship 1", "Location 1", "remote", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
-insert into internship values (null, 2, "Internship 3", "Location 1", "on-site", "Some skills", 12345.67, 365, "2025-07-01");
+insert into internship values (null, 1, "Internship 1", "Location 1", "Remote", "Some skills", 12345.67, 1, "2025-07-01");
+insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 2, "2025-07-01");
+insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 3, "2025-07-01");
+insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 4, "2025-07-01");
+insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 5, "2025-07-01");
+insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 6, "2025-07-01");
+insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 7, "2025-07-01");
+insert into internship values (null, 2, "Internship 3", "Location 1", "On-site", "Some skills", 12345.67, 8, "2025-07-01");
 
 insert into student values (null, "John", "user@test.com", "123");
 insert into student values (null, "Bob", "user2", "");

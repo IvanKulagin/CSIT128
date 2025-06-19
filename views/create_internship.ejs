@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Internship</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -15,9 +15,9 @@
     </div>
     <div class="nav-div">
       <nav>
-        <a href="company-dashboard.html">Dashboard</a>
+        <a href="/admin/internship">Dashboard</a>
         <a href="company-profile.html">Profile</a>
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
       </nav>
     </div>
   </div>
@@ -25,7 +25,7 @@
   <div class="form-container">
     <h2>Create New Internship</h2>
 
-    <form action="company_dashboard.html">
+    <form method="post">
       <div class="form-group">
         <label for="title">Internship Title</label>
         <input type="text" id="title" name="title" placeholder="e.g. Frontend Developer Intern" required />
@@ -47,7 +47,6 @@
           <option value="" disabled selected>Select type</option>
           <option value="Remote">Remote</option>
           <option value="On-site">On-site</option>
-          <option value="Hybrid">Hybrid</option>
         </select>
       </div>
 

@@ -1,7 +1,6 @@
 const express = require("express")
 const session = require("express-session")
 const mysql = require("mysql")
-const formidable = require("formidable")
 const path = require("path")
 require("dotenv").config()
 

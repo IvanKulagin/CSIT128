@@ -15,7 +15,7 @@ function search() {
             div = document.getElementById("internshipsContainer")
             div.innerHTML = ""
             json.forEach((element) => {
-                div.innerHTML += `<a href="student_internship.html">
+                div.innerHTML += `<a href="internship/${element.id}">
                     <div class="internship-card">
                         <h3>${element.title}</h3>
                         <p><strong>Company:</strong> ${element.name}</p>

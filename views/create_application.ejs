@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apply for Internship</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
@@ -15,16 +15,16 @@
     </div>
     <div class="nav-div">
       <nav>
-        <a href="student_dashboard.html">Dashboard</a>
+        <a href="/student/internship">Dashboard</a>
         <a href="student_profile.html">Profile</a>
-        <a href="index.html">Log out</a>
+        <a href="/">Log out</a>
       </nav>
     </div>
   </div>
 
   <div class="application-form-container">
-    <h2>Apply for Frontend Developer Internship</h2>
-    <form action="student_dashboard.html" enctype="multipart/form-data">
+      <h2>Apply for <%=title%></h2>
+    <form method="post" enctype="multipart/form-data">
       <div class="application-form-group">
         <label for="cv">Upload Your CV</label>
         <input type="file" id="cv" name="cv" accept=".pdf, .doc, .docx" required />

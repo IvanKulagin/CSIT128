@@ -1,5 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
+const formidable = require("formidable")
+const path = require("path")
 const router = express.Router();
 
 const pool = mysql.createPool({
@@ -52,7 +54,14 @@ router.route("/login")
     })
 
 router.get("/logout", (req, res) => {
-    res.send("logout")
+    req.session.user = null
+    req.session.save(function (err) {
+        if (err) throw err
+        req.session.regenerate(function (err) {
+            if (err) throw err
+            res.redirect("/")
+        })
+    })
 })
 
 router.get("/internship", isStudent, (req, res) => {
@@ -64,22 +73,26 @@ router.get("/internship", isStudent, (req, res) => {
     })
 })
 
-router.route("/internship/:id")
+router.get("/internship/:id", isStudent, (req, res) => {
+    pool.query("select internship.*, company.name from internship join company on company_id = company.id where internship.id = ?", [req.params.id], (err, result) => {
+        res.render("student_internship", result[0])
+    })
+})
+
+router.route("/internship/:id/apply")
     .get(isStudent, (req, res) => {
-        pool.query("select * from internship join company on company_id = company.id where internship.id = ?", [req.params.id], (err, result) => {
+        pool.query("select * from internship where internship.id = ?", [req.params.id], (err, result) => {
             if (err) throw err
-            res.render("application", {
-                internship: JSON.stringify(result)
-            })
+            res.render("create_application", result[0])
         })
     })
     .post((req, res) => {
-        const form = formidable.formidable({ uploadDir: __dirname + "/uploads" });
+        const form = formidable.formidable({ uploadDir: path.join(__dirname, "uploads") });
         form.parse(req, (err, fields, files) => {
             if (err) throw err
             console.log(fields)
             console.log(files)
-            pool.query("insert into application values (null, ?, ?, ?, ?, null)", [req.session.user, req.params.id, files.portfolio[0].newFilename, fields.comment[0]], (err, result) => {
+            pool.query("insert into application values (null, ?, ?, ?, ?, null)", [req.session.user, req.params.id, files.cv[0].newFilename, fields.about[0]], (err, result) => {
                 if (err) throw err
                 console.log(result)
                 res.redirect("/student/internship")

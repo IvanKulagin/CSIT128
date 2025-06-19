@@ -93,8 +93,8 @@ router.route("/internship/create")
     })
     .post(express.urlencoded(), (req, res) => {
         console.log(req.body)
-        const keys = ["title", "location", "type", "skills", "duration"]
-        pool.query("insert into internship (company_id, title, location, type, skills, duration) value (?, ?, ?, ?, ?, ?)", [req.session.user].concat(keys.map(key => req.body[key])), (err, result) => {
+        const keys = ["title", "location", "type", "skills", "duration", "deadline"]
+        pool.query("insert into internship (company_id, " + keys.join(", ") + ") value ("+ "?, ".repeat(keys.length) +"?)", [req.session.user].concat(keys.map(key => req.body[key])), (err, result) => {
             if (err) throw err
             console.log(result)
         })

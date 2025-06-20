@@ -6,6 +6,9 @@ create table company(
 	id int auto_increment primary key,
 	name text,
 	email text,
+	phone text,
+	address text,
+	description text,
 	password text
 );
 
@@ -19,6 +22,7 @@ create table internship (
 	salary decimal(10, 2),
 	duration int,
 	deadline date,
+	description text,
 	foreign key (company_id) references company(id)
 );
 
@@ -26,37 +30,34 @@ create table student (
 	id int auto_increment primary key,
 	name text,
 	email text,
+	phone text,
+	university text,
+	major text,
+	year int,
+	bio text,
 	password text
 );
 
-create table application ( #make student_id and intership_id combination unique
+create table application (
 	id int auto_increment primary key,
 	internship_id int,
 	student_id int,
-	portfolio text,
-	comment text,
-	status enum("accepted", "rejected", "shortlisted"),
+	cv text,
+	filename text,
+	about text,
+	status enum("Accepted", "Rejected", "Shortlisted"),
 	foreign key (student_id) references student(id),
 	foreign key (internship_id) references internship(id) on delete cascade
 );
 
-insert into company values (null, "Company 1", "admin@test.com", "123");
-insert into company values (null, "Company 2", "admin2", "");
+insert into company (name, email, password) values ("Company 1", "admin@test.com", "123");
+insert into company (name) values ("Company 2");
 
-insert into internship values (null, 1, "Internship 1", "Location 1", "Remote", "Some skills", 12345.67, 1, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 2, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 3, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 4, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 5, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 6, "2025-07-01");
-insert into internship values (null, 1, "Internship 2", "Location 1", "On-site", "Some skills", 12345.67, 7, "2025-07-01");
-insert into internship values (null, 2, "Internship 3", "Location 1", "On-site", "Some skills", 12345.67, 8, "2025-07-01");
+insert into internship values (null, 1, "Test Internship 1", "Dubai", "On-site", "Some skills", 1200.99, 3, "2025-08-01", "Here is a description");
+insert into internship values (null, 2, "Best Internship 2", "Abu Dhabi", "Remote", "Some skills", 500, 6, "2025-08-01", "Here is a description");
 
-insert into student values (null, "John", "user@test.com", "123");
-insert into student values (null, "Bob", "user2", "");
+insert into student values (null, "John", "user@test.com", "+971..", "Wollongong", "CS", 2, "My bio", "123");
+insert into student values (null, "John", "user2@test.com", "+971..", "Wollongong", "CS", 2, "My bio", "123");
 
-insert into application values (null, 1, 1, "test.pdf", "Comment", null);
-insert into application values (null, 1, 2, "test.pdf", "Comment", null);
-insert into application values (null, 1, 1, "test.pdf", "Comment", null);
-insert into application values (null, 1, 2, "test.pdf", "Comment", null);
-insert into application values (null, 2, 2, "test.pdf", "Comment", null);
+insert into application values (null, 1, 1, "test.pdf", "cv.pdf", "Description", null);
+insert into application values (null, 1, 2, "test.pdf", "cv.pdf", "Description", null);

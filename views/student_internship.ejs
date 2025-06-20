@@ -35,11 +35,6 @@
         </div>
 
         <div class="info-block">
-            <label>Duration:</label>
-            <p><%=duration%> Months</p>
-        </div>
-
-        <div class="info-block">
             <label>Type:</label>
             <p><%=type%></p>
         </div>
@@ -50,11 +45,32 @@
         </div>
 
         <div class="info-block">
-            <label>Description:</label>
-            <p>not set</p>
+            <label>Salary:</label>
+            <p><%=salary%></p>
         </div>
 
+        <div class="info-block">
+            <label>Duration:</label>
+            <p><%=duration%> Months</p>
+        </div>
+
+        <div class="info-block">
+            <label>Deadline:</label>
+            <p><%=deadline%></p>
+        </div>
+
+        <div class="info-block">
+            <label>Description:</label>
+            <p><%=description%></p>
+        </div>
+        <%if (application === null) {%>
         <a href="/student/internship/<%=id%>/apply" class="submit-button">Apply for Internship</a>
+        <%} else {%>
+        <div class="info-block">
+            <label>Application Status:</label>
+            <p><%=status ? status : "On review"%></p>
+        </div>
+        <%}%>
     </div>
 </body>
 </html>

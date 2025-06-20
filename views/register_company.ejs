@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Company Registration</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/register.js" defer></script>
 </head>
 
 <body>
@@ -23,9 +24,9 @@
     <div class="login-container">
         <h2>Company Registration</h2>
 
-        <form method="post">
+        <form id="register-form" method="post">
             <div class="form-group">
-                <label for="company-name">Company Name</label>
+                <label for="name">Company Name</label>
                 <input type="text" id="name" name="name" required />
             </div>
 
@@ -41,11 +42,7 @@
 
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input
-                        type="password"
-                        id="confirm-password"
-                        required
-                        />
+                <input type="password" id="confirm" required />
             </div>
 
             <button type="submit" class="login-button">Register</button>

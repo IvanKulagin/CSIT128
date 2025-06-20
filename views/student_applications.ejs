@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Company Dashboard</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <script src="/js/company_dashboard.js" defer></script>
 </head>
 
 <body>
@@ -22,15 +21,17 @@
     </div>
 
     <div class="dashboard-container">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search internships..." />
+        <div class="internships-grid" id="internshipsContainer">
+            <%applications.forEach((application) => {%>
+            <a href="/student/internship/<%=application.internship_id%>">
+                <div class="internship-card">
+                    <h3><%=application.title%></h3>
+                    <p>Company: <%=application.name%></p>
+                    <p>Status: <%=application.status ? application.status : "On review"%></p>
+                </div>
+            </a>
+            <%})%>
         </div>
-
-        <div class="create-internship-container">
-            <a href="/admin/internship/create" class="create-internship-button">Create Internship</a>
-        </div>
-
-        <div class="internships-grid" id="internshipsContainer"></div>
     </div>
 </body>
 </html>

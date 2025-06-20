@@ -75,20 +75,55 @@ router.get("/logout", (req, res) => {
 
 router.route("/profile")
     .get(isStudent, (req, res) => {
-        res.render("student_profile")
-    })
-
-router.get("/internship", isStudent, (req, res) => {
-    pool.query("select * from company", (err, result) => {
-        if (err) throw err
-        res.render("student_dashboard", {
-            companies: result
+        pool.query("select * from student where id = ?", [req.session.user], (err, result) => {
+            if (err) throw err
+            res.render("student_profile", result[0])
         })
     })
-})
+    .post(express.urlencoded(), (req, res) => {
+        const keys = ["name", "email", "phone", "university", "major", "year", "bio"] //password
+        pool.query(`update student set ${keys.map(key => `${key} = ?`).join(", ")} where id = ?`, [...keys.map(key => req.body[key]), req.session.user], (err, result) => {
+            if (err) throw err
+            res.redirect("/student/internship")
+        })
+    })
+
+router.route("/internship")
+    .get(isStudent, (req, res) => {
+        pool.query("select * from company", (err, result) => {
+            if (err) throw err
+            res.render("student_dashboard", {
+                companies: result
+            })
+        })
+    })
+    .post(express.json(), (req, res) => {
+        console.log(req.body)
+        query = "select internship.*, name from internship join company on company_id = company.id where duration <= ? and salary >= ? and "
+        params = [req.body.duration, req.body.salary]
+        tokens = []
+        req.body.search.forEach(token => {
+            tokens.push("(title like ? or location like ?)")
+            params.push(`%${token}%`)
+            params.push(`%${token}%`)
+        })
+        query += tokens.join(" and ")
+        if (req.body.company.length > 0) {
+            query += " and company_id in (?)"
+            params.push(req.body.company)
+        }
+        if (req.body.type.length > 0) {
+            query += " and type in (?)"
+            params.push(req.body.type)
+        }
+        pool.query(query, params, (err, result) => {
+            if (err) throw err
+            res.send(result)
+        })
+    })
 
 router.get("/internship/:id", isStudent, (req, res) => {
-    pool.query("select internship.*, company.name from internship join company on company_id = company.id where internship.id = ?", [req.params.id], (err, result) => {
+    pool.query("select internship.*, company.name, application.id as application, status from internship join company on company_id = company.id join application on internship.id = internship_id where internship.id = ?", [req.params.id], (err, result) => {
         res.render("student_internship", result[0])
     })
 })
@@ -104,14 +139,18 @@ router.route("/internship/:id/apply")
         const form = formidable.formidable({ uploadDir: path.join(__dirname, "uploads") });
         form.parse(req, (err, fields, files) => {
             if (err) throw err
-            console.log(fields)
-            console.log(files)
-            pool.query("insert into application values (null, ?, ?, ?, ?, null)", [req.session.user, req.params.id, files.cv[0].newFilename, fields.about[0]], (err, result) => {
+            pool.query("insert into application values (null, ?, ?, ?, ?, ?, null)", [req.params.id, req.session.user, files.cv[0].newFilename, files.cv[0].originalFilename, fields.about[0]], (err, result) => {
                 if (err) throw err
-                console.log(result)
                 res.redirect("/student/internship")
             })
         })
     })
+
+router.get("/applications", isStudent, (req, res) => {
+    pool.query("select application.*, title, name from application join internship on internship_id = internship.id join company on company_id = company.id where student_id = ?", [req.session.user], (err, result) => {
+        res.render("student_applications", { applications: result })
+    })
+
+})
 
 module.exports = router

@@ -36,11 +36,6 @@
             </div>
 
             <div class="form-group">
-                <label for="duration">Duration (in months)</label>
-                <input type="number" id="duration" name="duration" min="1" max="12" value="<%=duration%>" required />
-            </div>
-
-            <div class="form-group">
                 <label for="type">Type</label>
                 <select id="type" name="type" required>
                     <option value="Remote" <% if (location == "Remote") {%>selected<%}%>>Remote</option>
@@ -54,8 +49,23 @@
             </div>
 
             <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="text" id="salary" name="salary" placeholder="0.00" pattern="^(0\.\d{1,2}|[1-9]{1}\d*(\.\d{1,2})?)$" value="<%=salary%>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration (in months)</label>
+                <input type="number" id="duration" name="duration" min="1" max="12" value="<%=duration%>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="deadline">Application Deadline</label>
+                <input type="date" id="deadline" name="deadline" value="<%=deadline%>" required />
+            </div>
+
+            <div class="form-group">
                 <label for="description">Internship Description</label>
-                <textarea id="description" name="description" rows="6" placeholder="Describe the internship responsibilities, expectations, etc."></textarea>
+                <textarea id="description" name="description" rows="6" placeholder="Describe the internship responsibilities, expectations, etc."><%=description%></textarea>
             </div>
 
             <button type="submit" class="submit-button">Save Changes</button>

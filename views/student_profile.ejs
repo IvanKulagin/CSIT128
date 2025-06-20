@@ -23,46 +23,40 @@
     <div class="profile-container">
         <h2>Student Profile</h2>
 
-        <form action="student_dashboard.html">
+        <form method="post">
             <div class="form-group">
-                <label for="student-name">Full Name</label>
-                <input type="text" id="student-name" name="student-name" value="Jane Doe" required />
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" value="<%=name%>" required />
             </div>
 
             <div class="form-group">
-                <label for="student-email">Email</label>
-                <input type="email" id="student-email" name="student-email" value="jane@example.com" required />
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="<%=email%>" required />
             </div>
 
             <div class="form-group">
-                <label for="student-phone">Phone</label>
-                <input type="tel" id="student-phone" name="student-phone" value="+971 50 123-45-67" />
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="+9710(5)xxxxxxxx" pattern="^\+9710(5\d|[1-9])\d{7}$" value="<%=phone%>" />
             </div>
 
             <div class="form-group">
-                <label for="student-university">University</label>
-                <input type="text" id="student-university" name="student-university" value="University of Wollongong" />
+                <label for="university">University</label>
+                <input type="text" id="university" name="university" value="<%=university%>" />
             </div>
 
             <div class="form-group">
-                <label for="student-major">Major / Field of Study</label>
-                <input type="text" id="student-major" name="student-major" value="Computer Science" />
+                <label for="major">Major / Field of Study</label>
+                <input type="text" id="major" name="major" value="<%=major%>" />
             </div>
 
             <div class="form-group">
-                <label for="student-year">Year</label>
-                <select id="student-year" name="student-year">
-                    <option value="1st" selected>1st Year</option>
-                    <option value="2nd">2nd Year</option>
-                    <option value="3rd">3rd Year</option>
-                    <option value="4th">4th Year</option>
-                    <option value="graduate">Graduate</option>
-                </select>
+                <label for="year">Year</label>
+                <input type="number" id="year" name="year" min=1 max=4 value="<%=year%>" />
             </div>
 
             <div class="form-group">
-                <label for="student-bio">Short Bio</label>
-                <textarea id="student-bio" name="student-bio" rows="4">best in csit128</textarea>
+                <label for="bio">Short Bio</label>
+                <textarea id="bio" name="bio" rows="4"><%=bio%></textarea>
             </div>
 
             <button type="submit" class="save-button">Save Changes</button>

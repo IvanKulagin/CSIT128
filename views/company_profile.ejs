@@ -28,28 +28,28 @@
 
         <form method="post">
             <div class="form-group">
-                <label for="company-name">Company Name</label>
-                <input type="text" id="company-name" name="company-name" value="Example Corp" required />
+                <label for="name">Company Name</label>
+                <input type="text" id="name" name="name" value="<%=name%>" required />
             </div>
 
             <div class="form-group">
-                <label for="company-email">Email</label>
-                <input type="email" id="company-email" name="company-email" value="contact@example.com" required />
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="<%=email%>" required />
             </div>
 
             <div class="form-group">
-                <label for="company-phone">Phone</label>
-                <input type="tel" id="company-phone" name="company-phone" value="+971 50 123-45-67" />
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="+9710(5)xxxxxxxx" pattern="^\+9710(5\d|[1-9])\d{7}$" value="<%=phone%>" />
             </div>
 
             <div class="form-group">
-                <label for="company-address">Address</label>
-                <textarea id="company-address" name="company-address" rows="3">123 Example St, Business Bay, Dubai</textarea>
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3"><%=address%></textarea>
             </div>
 
             <div class="form-group">
-                <label for="company-description">Company Description</label>
-                <textarea id="company-description" name="company-description" rows="5">We are very good in programming</textarea>
+                <label for="description">Company Description</label>
+                <textarea id="description" name="description" rows="5"><%=description%></textarea>
             </div>
 
             <button type="submit" class="save-button">Save Changes</button>

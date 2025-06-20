@@ -37,11 +37,10 @@ app.use("/admin", admin)
 app.use("/student", student)
 
 app.get("/api/download/:file", (req, res) => {
-    res.download(__dirname + "/uploads/" + req.params.file) //set a nice name or save original name in the table
+    res.download(__dirname + "/uploads/" + req.params.file, req.query.filename) //set a nice name or save original name in the table
 })
 
 app.post("/api/internships", express.json(), (req, res) => {
-    console.log(req.body)
     query = "select internship.*, name from internship join company on company_id = company.id where "
     params = []
     tokens = []
@@ -49,7 +48,7 @@ app.post("/api/internships", express.json(), (req, res) => {
         tokens.push("title like ?")
         params.push(`%${token}%`)
     })
-    query += tokens.join(" AND ")
+    query += tokens.join(" and ")
     if (req.body.company.length > 0) {
         query += " and company_id in (?)"
         params.push(req.body.company)
@@ -61,7 +60,6 @@ app.post("/api/internships", express.json(), (req, res) => {
     //pool.query("select internship.id, title, application.id as application, status from internship left join (select * from application where student_id = ?) application on internship.id = internship_id where title like ? and company_id in (?) and location = ?", [req.session.user, `%${req.body.title}%`, req.body.companies, req.body.location], (err, result) => {
     pool.query(query, params, (err, result) => {
         if (err) throw err
-        console.log(result)
         res.send(result)
     })
 })

@@ -51,7 +51,7 @@ router.route("/profile")
         })
     })
     .post(express.urlencoded(), (req, res) => {
-        const keys = ["name", "email", "phone", "university", "major", "year", "bio"] //password
+        const keys = ["name", "email", "phone", "university", "major", "year", "bio", "password"]
         pool.query(`update student set ${keys.map(key => `${key} = ?`).join(", ")} where id = ?`, [...keys.map(key => req.body[key]), req.session.user], (err, result) => {
             if (err) throw err
             res.redirect("/student/internship")

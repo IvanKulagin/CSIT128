@@ -1,5 +1,6 @@
-const express = require("express");
-const mysql = require("mysql");
+const express = require("express")
+const mysql = require("mysql")
+const bcrypt = require("bcrypt") //add
 
 const pool = mysql.createPool({
     host: "localhost",

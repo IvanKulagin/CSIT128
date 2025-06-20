@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Company Profile</title>
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-
-    </style>
+    <script src="/js/password.js" defer></script>
 </head>
 
 <body>
@@ -26,7 +24,7 @@
     <div class="profile-container">
         <h2>Company Profile</h2>
 
-        <form method="post">
+        <form id="password-form" method="post">
             <div class="form-group">
                 <label for="name">Company Name</label>
                 <input type="text" id="name" name="name" value="<%=name%>" required />
@@ -52,8 +50,19 @@
                 <textarea id="description" name="description" rows="5"><%=description%></textarea>
             </div>
 
+            <div class="form-group">
+                <label for="password">Change Password</label>
+                <input type="password" id="password" name="password" value="<%=password%>" required />
+            </div>
+
+            <div class="form-group">
+                <label for="confirm">Confirm Password</label>
+                <input type="password" id="confirm" value="<%=password%>" required />
+            </div>
+
             <button type="submit" class="save-button">Save Changes</button>
         </form>
     </div>
+    <div class="center" id="alert"></div>
 </body>
 </html>

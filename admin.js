@@ -177,7 +177,10 @@ router.route("/application/:id")
         pool.query("update application set status = ? where id = ?", [req.body.action, req.params.id], (err, result) => {
             if (err) throw err
         })
-        res.redirect(`/admin/internship`) //better to return to current intership, but we lose its id
+        pool.query("select internship_id from application where id = ?", [req.params.id], (err, result) => {
+            if (err) throw err
+            res.redirect(`/admin/internship/${result[0].internship_id}`) //better to return to current intership, but we lose its id
+        })
     })
 
 module.exports = router

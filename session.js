@@ -66,13 +66,13 @@ exports.validate = (table) => {
                         next()
                     }
                     else {
-                        req.session.failed = true
+                        req.session.error = true
                         res.redirect(req.originalUrl)
                     }
                 })
             }
             else {
-                req.session.failed = true
+                req.session.error = true
                 res.redirect(req.originalUrl)
             }
         })

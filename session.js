@@ -1,17 +1,9 @@
 const express = require("express")
 const mysql = require("mysql")
 const bcrypt = require("bcrypt")
+const { pool } = require("./mysql")
 
-const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: process.env.MYSQL_PASS,
-    database: "project",
-    connectionLimit: 10,
-    dateStrings: true
-})
-
-exports.register = (table) => {
+function register(table) {
     return (req, res, next) => {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
             if (err) throw err
@@ -41,7 +33,7 @@ exports.register = (table) => {
     }
 }
 
-exports.login = (role) => {
+function login(role) {
     return (req, res, next) => {
         req.session.regenerate((err) => {
             if (err) throw err
@@ -55,7 +47,7 @@ exports.login = (role) => {
     }
 }
 
-exports.validate = (table) => {
+function validate(table) {
     return (req, res, next) => {
         pool.query(`select * from ${table} where email = ?`, [req.body.email], (err, result) => {
             if (err) throw err
@@ -79,7 +71,7 @@ exports.validate = (table) => {
     }
 }
 
-exports.logout = (req, res, next) => {
+function logout(req, res, next) {
     req.session.user = null
     req.session.save(function (err) {
         if (err) throw err
@@ -88,4 +80,11 @@ exports.logout = (req, res, next) => {
             next()
         })
     })
+}
+
+module.exports = {
+    register,
+    login,
+    validate,
+    logout
 }

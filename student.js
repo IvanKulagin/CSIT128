@@ -1,18 +1,21 @@
 const express = require("express")
 const formidable = require("formidable")
 const path = require("path")
-const bcrypt = require("bcrypt")
 
 const router = express.Router()
 
 const { register, validate, login, logout } = require("./session")
 
-const { pool } = require("./mysql")
+const { pool, update_profile } = require("./mysql")
 
 function isStudent (req, res, next) {
     if (req.session.user && req.session.role == "student") next()
     else res.redirect("/student/login")
 }
+
+router.get("/", (req, res) => {
+    res.redirect("/student/internship")
+})
 
 router.route("/register")
     .get((req, res) => {
@@ -47,22 +50,8 @@ router.route("/profile")
             res.render("student_profile", { ...result[0], error })
         })
     })
-    .post(express.urlencoded(), (req, res) => {
-        pool.query("select * from student where email = ? and id != ?", [req.body.email, req.session.user], (err, result) => {
-            if (result.length > 0) {
-                req.session.error = "Email already exists"
-                res.redirect("/student/profile")
-            }
-            else {
-                const keys = ["name", "email", "phone", "university", "major", "year", "bio"]
-                bcrypt.hash(req.body.password, 10, function(err, hash) {
-                    pool.query(`update student set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
-                        if (err) throw err
-                        res.redirect("/student/internship")
-                    })
-                })
-            }
-        })
+    .post(express.urlencoded(), update_profile("student", ["name", "email", "phone", "university", "major", "year", "bio"]), (req, res) => {
+        res.redirect("/student/internship")
     })
 
 router.route("/internship")

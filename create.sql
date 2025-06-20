@@ -4,8 +4,8 @@ use project;
 
 create table company(
 	id int auto_increment primary key,
-	name text,
-	email text unique,
+	name text not null,
+	email text not null unique,
 	phone text,
 	address text,
 	description text,
@@ -28,8 +28,8 @@ create table internship (
 
 create table student (
 	id int auto_increment primary key,
-	name text,
-	email text unique,
+	name text not null,
+	email text not null unique,
 	phone text,
 	university text,
 	major text,
@@ -51,7 +51,7 @@ create table application (
 );
 
 insert into company (name, email, password) values ("Company 1", "admin@test.com", "$2b$10$evvpvujR8eMihq6CpQn3jOHW/YH1ZD8FemSjlnksmQh5z8zQulcoG");
-insert into company (name) values ("Company 2");
+insert into company (name, email) values ("Company 2", "admin2@test.com");
 
 insert into internship values (null, 1, "Test Internship 1", "Dubai", "On-site", "Some skills", 1200.99, 3, "2025-08-01", "Here is a description");
 insert into internship values (null, 2, "Best Internship 2", "Abu Dhabi", "Remote", "Some skills", 500, 6, "2025-08-01", "Here is a description");

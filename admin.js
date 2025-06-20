@@ -9,7 +9,7 @@ const { pool } = require("./mysql")
 
 function isAdmin (req, res, next) {
     if (req.session.user && req.session.role == "admin") next()
-    else res.redirect("/admin/login") //remember previous page
+    else res.redirect("/admin/login")
 }
 
 function internshipOwned (req, res, next) {
@@ -179,7 +179,7 @@ router.route("/application/:id")
         })
         pool.query("select internship_id from application where id = ?", [req.params.id], (err, result) => {
             if (err) throw err
-            res.redirect(`/admin/internship/${result[0].internship_id}`) //better to return to current intership, but we lose its id
+            res.redirect(`/admin/internship/${result[0].internship_id}`)
         })
     })
 

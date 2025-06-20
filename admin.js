@@ -1,19 +1,11 @@
 const express = require("express")
-const mysql = require("mysql")
 const bcrypt = require("bcrypt")
 
 const router = express.Router()
 
 const { register, validate, login, logout } = require("./session")
 
-const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: process.env.MYSQL_PASS,
-    database: "project",
-    connectionLimit: 10,
-    dateStrings: true
-})
+const { pool } = require("./mysql")
 
 function isAdmin (req, res, next) {
     if (req.session.user && req.session.role == "admin") next()

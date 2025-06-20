@@ -1,20 +1,10 @@
 const express = require("express")
 const session = require("express-session")
-const mysql = require("mysql")
 const path = require("path")
 require("dotenv").config()
 
 const admin = require("./admin")
 const student = require("./student")
-
-const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: process.env.MYSQL_PASS,
-    database: "project",
-    connectionLimit: 10,
-    dateStrings: true
-})
 
 const app = express()
 

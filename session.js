@@ -15,19 +15,26 @@ exports.register = (table) => {
     return (req, res, next) => {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
             if (err) throw err
-            pool.query(`insert into ${table} (name, email, password) values (?, ?, ?)`, [req.body.name, req.body.email, hash], (err, result) => {
-                if (err) {
-                    if (err.code == "ER_DUP_ENTRY") {
-                        req.session.failed = true
-                        res.redirect(req.originalUrl)
-                    }
-                    else {
-                        throw err
-                    }
+            pool.query(`select * from ${table} where name = ?`, [req.body.name], (err, result) => {
+                if (err) throw err
+                if (table != "student" && result.length != 0) {
+                    req.session.error = "Name already exists"
+                    res.redirect(req.originalUrl)
                 }
                 else {
-                    req.user = result.insertId
-                    next()
+                    pool.query(`select * from ${table} where email = ?`, [req.body.email], (err, result) => {
+                        if (result.length != 0) {
+                            req.session.error = "Email already exists"
+                            res.redirect(req.originalUrl)
+                        }
+                        else {
+                            pool.query(`insert into ${table} (name, email, password) values (?, ?, ?)`, [req.body.name, req.body.email, hash], (err, result) => {
+                                if (err) throw err
+                                req.user = result.insertId
+                                next()
+                            })
+                        }
+                    })
                 }
             })
         })

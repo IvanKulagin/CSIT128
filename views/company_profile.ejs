@@ -63,6 +63,12 @@
             <button type="submit" class="save-button">Save Changes</button>
         </form>
     </div>
-    <div class="center" id="alert"></div>
+    <div class="center" id="alert">
+    <%if (error) {%>
+        <div class="alert">
+            <p><%=error%></p>
+        </div>
+    <%}%>
+    </div>
 </body>
 </html>

@@ -17,9 +17,9 @@ function isStudent (req, res, next) {
 
 router.route("/register")
     .get((req, res) => {
-        const failed = req.session.failed
-        req.session.failed = null
-        res.render("register_student", { failed })
+        const error = req.session.error
+        req.session.error = null
+        res.render("register_student", { error })
     })
     .post(express.urlencoded(), register("student"), login("student"), (req, res) => {
         res.redirect("/student/internship")
@@ -27,9 +27,9 @@ router.route("/register")
 
 router.route("/login")
     .get((req, res) => {
-        const failed = req.session.failed
-        req.session.failed = null
-        res.render("login_student", { failed })
+        const error = req.session.error
+        req.session.error = null
+        res.render("login_student", { error })
     })
     .post(express.urlencoded(), validate("student"), login("student"), (req, res) => {
         res.redirect("/student/internship")
@@ -43,16 +43,26 @@ router.route("/profile")
     .get(isStudent, (req, res) => {
         pool.query("select * from student where id = ?", [req.session.user], (err, result) => {
             if (err) throw err
-            res.render("student_profile", result[0])
+            const error = req.session.error
+            req.session.error = null
+            res.render("student_profile", { ...result[0], error })
         })
     })
     .post(express.urlencoded(), (req, res) => {
-        const keys = ["name", "email", "phone", "university", "major", "year", "bio"]
-        bcrypt.hash(req.body.password, 10, function(err, hash) {
-            pool.query(`update student set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
-                if (err) throw err
-                res.redirect("/student/internship")
-            })
+        pool.query("select * from student where email = ? and id != ?", [req.body.email, req.session.user], (err, result) => {
+            if (result.length > 0) {
+                req.session.error = "Email already exists"
+                res.redirect("/student/profile")
+            }
+            else {
+                const keys = ["name", "email", "phone", "university", "major", "year", "bio"]
+                bcrypt.hash(req.body.password, 10, function(err, hash) {
+                    pool.query(`update student set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
+                        if (err) throw err
+                        res.redirect("/student/internship")
+                    })
+                })
+            }
         })
     })
 

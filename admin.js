@@ -38,9 +38,9 @@ function applicationOwned (req, res, next) {
 
 router.route("/register")
     .get((req, res) => {
-        const failed = req.session.failed
-        req.session.failed = null
-        res.render("register_company", { failed })
+        const error = req.session.error
+        req.session.error = null
+        res.render("register_company", { error })
     })
     .post(express.urlencoded(), register("company"), login("admin"), (req, res) => {
         res.redirect("/admin/internship")
@@ -48,9 +48,9 @@ router.route("/register")
 
 router.route("/login")
     .get((req, res) => {
-        const failed = req.session.failed
-        req.session.failed = null
-        res.render("login_company", { failed })
+        const error = req.session.error
+        req.session.error = null
+        res.render("login_company", { error })
     })
     .post(express.urlencoded(), validate("company"), login("admin"), (req, res) => {
         res.redirect("/admin/internship")
@@ -64,17 +64,35 @@ router.route("/profile")
     .get(isAdmin, (req, res) => {
         pool.query("select * from company where id = ?", [req.session.user], (err, result) => {
             if (err) throw err
-            res.render("company_profile", result[0])
+            const error = req.session.error
+            req.session.error = null
+            res.render("company_profile", { ...result[0], error })
         })
     })
     .post(express.urlencoded(), (req, res) => {
-        const keys = ["name", "email", "phone", "address", "description"]
-        bcrypt.hash(req.body.password, 10, function(err, hash) {
-            pool.query(`update company set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
-                if (err) throw err
-                res.redirect("/admin/internship")
-            })
-        });
+        pool.query("select * from company where name = ? and id != ?", [req.body.name, req.session.user], (err, result) => {
+            if (result.length > 0) {
+                req.session.error = "Name already exists"
+                res.redirect("/admin/profile")
+            }
+            else {
+                pool.query("select * from company where email = ? and id != ?", [req.body.email, req.session.user], (err, result) => {
+                    if (result.length > 0) {
+                        req.session.error = "Email already exists"
+                        res.redirect("/admin/profile")
+                    }
+                    else {
+                        const keys = ["name", "email", "phone", "address", "description"]
+                        bcrypt.hash(req.body.password, 10, function(err, hash) {
+                            pool.query(`update company set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
+                                if (err) throw err
+                                res.redirect("/admin/internship")
+                            })
+                        });
+                    }
+                })
+            }
+        })
     })
 
 

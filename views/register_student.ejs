@@ -53,9 +53,9 @@
         </div>
     </div>
     <div class="center" id="alert">
-    <%if (failed) {%>
+    <%if (error) {%>
         <div class="alert">
-            <p>Email already registered</p>
+            <p><%=error%></p>
         </div>
     <%}%>
     </div>

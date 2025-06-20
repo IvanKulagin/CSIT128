@@ -14,7 +14,6 @@ function isStudent (req, res, next) {
     else res.redirect("/student/login")
 }
 
-
 router.route("/register")
     .get((req, res) => {
         const error = req.session.error
@@ -76,7 +75,6 @@ router.route("/internship")
         })
     })
     .post(express.json(), (req, res) => {
-        console.log(req.body)
         query = "select internship.*, name from internship join company on company_id = company.id where duration <= ? and salary >= ? and "
         params = [req.body.duration, req.body.salary]
         tokens = []

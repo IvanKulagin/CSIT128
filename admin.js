@@ -133,7 +133,7 @@ router.route("/internship/create")
     })
 
 router.get("/internship/:id", isAdmin, internshipOwned, (req, res) => {
-    pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => { //no check for company_id
+    pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => {
         if (err) throw err
         pool.query("select application.*, student.name from application join student on student_id = student.id where internship_id = ?", [req.params.id], (err, applications) => {
             res.render("company_internship", {
@@ -146,7 +146,7 @@ router.get("/internship/:id", isAdmin, internshipOwned, (req, res) => {
 
 router.route("/internship/:id/edit")
     .get(isAdmin, internshipOwned, (req, res) => {
-        pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => { //no check for company_id
+        pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => {
             if (err) throw err
             res.render("edit_internship", internship[0])
         })

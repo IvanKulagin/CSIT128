@@ -4,6 +4,8 @@ const formidable = require("formidable")
 const path = require("path")
 const router = express.Router();
 
+const { register, validate, login, logout } = require("./session")
+
 const pool = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -14,63 +16,31 @@ const pool = mysql.createPool({
 })
 
 function isStudent (req, res, next) {
-    if (req.session.user) next()
+    if (req.session.user && req.session.role == "student") next()
     else res.redirect("/student/login")
 }
 
-router.get("/", isStudent, (req, res) => {
-    pool.query("select * from student where id = ?", [req.session.user], (err, result) => {
-        if (err) throw err
-        res.send("Welcome " + result[0].name)
-    })
-})
 
 router.route("/register")
     .get((req, res) => {
         res.render("register_student")
     })
-    .post(express.urlencoded(), (req, res) => {
-        console.log(req.body)
-        const keys = ["name", "email", "password"]
-        pool.query("insert into student values (null, ?, ?, ?)", keys.map(key => req.body[key]), (err, result) => {
-            if (err) throw err
-            console.log(result)
-            res.redirect("/student/login") //make autologin
-        })
+    .post(express.urlencoded(), register("student"), login("student"), (req, res) => {
+        res.redirect("/student/internship")
     })
 
 router.route("/login")
     .get((req, res) => {
-        res.render("login_student")
+        const failed = req.session.failed
+        req.session.failed = null
+        res.render("login_student", { failed })
     })
-    .post(express.urlencoded(), (req, res) => {
-        pool.query("select * from student where email = ? and password = ?", [req.body.email, req.body.password], (err, result) => {
-            if (err) throw err
-            if (result.length != 0) {
-                req.session.regenerate((err) => {
-                    if (err) throw err
-                    req.session.user = result[0].id
-                    req.session.save((err) => {
-                        if (err) throw err
-                        res.redirect("/student/internship")
-                    })
-                })
-            }
-            else {
-                res.redirect("/student/login")
-            }
-        })
+    .post(express.urlencoded(), validate("student"), login("student"), (req, res) => {
+        res.redirect("/student/internship")
     })
 
-router.get("/logout", (req, res) => {
-    req.session.user = null
-    req.session.save(function (err) {
-        if (err) throw err
-        req.session.regenerate(function (err) {
-            if (err) throw err
-            res.redirect("/")
-        })
-    })
+router.get("/logout", isStudent, logout, (req, res) => {
+    res.redirect("/")
 })
 
 router.route("/profile")
@@ -147,8 +117,8 @@ router.route("/internship/:id/apply")
     })
 
 router.get("/applications", isStudent, (req, res) => {
-    pool.query("select application.*, title, name from application join internship on internship_id = internship.id join company on company_id = company.id where student_id = ?", [req.session.user], (err, result) => {
-        res.render("student_applications", { applications: result })
+    pool.query("select application.*, title, name from application join internship on internship_id = internship.id join company on company_id = company.id where student_id = ?", [req.session.user], (err, applications) => {
+        res.render("student_applications", { applications })
     })
 
 })

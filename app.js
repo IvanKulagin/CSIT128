@@ -37,31 +37,7 @@ app.use("/admin", admin)
 app.use("/student", student)
 
 app.get("/api/download/:file", (req, res) => {
-    res.download(__dirname + "/uploads/" + req.params.file, req.query.filename) //set a nice name or save original name in the table
-})
-
-app.post("/api/internships", express.json(), (req, res) => {
-    query = "select internship.*, name from internship join company on company_id = company.id where "
-    params = []
-    tokens = []
-    req.body.title.forEach(token => {
-        tokens.push("title like ?")
-        params.push(`%${token}%`)
-    })
-    query += tokens.join(" and ")
-    if (req.body.company.length > 0) {
-        query += " and company_id in (?)"
-        params.push(req.body.company)
-    }
-    if (req.body.type.length > 0) {
-        query += " and type in (?)"
-        params.push(req.body.type)
-    }
-    //pool.query("select internship.id, title, application.id as application, status from internship left join (select * from application where student_id = ?) application on internship.id = internship_id where title like ? and company_id in (?) and location = ?", [req.session.user, `%${req.body.title}%`, req.body.companies, req.body.location], (err, result) => {
-    pool.query(query, params, (err, result) => {
-        if (err) throw err
-        res.send(result)
-    })
+    res.download(__dirname + "/uploads/" + req.params.file, req.query.filename)
 })
 
 app.listen(3000)

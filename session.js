@@ -1,0 +1,63 @@
+const express = require("express");
+const mysql = require("mysql");
+
+const pool = mysql.createPool({
+    host: "localhost",
+    user: "root",
+    password: process.env.MYSQL_PASS,
+    database: "project",
+    connectionLimit: 10,
+    dateStrings: true
+})
+
+exports.register = (table) => {
+    return (req, res, next) => {
+        const keys = ["name", "email", "password"]
+        pool.query(`insert into ${table} (name, email, password) values (?, ?, ?)`, keys.map(key => req.body[key]), (err, result) => {
+            if (err) throw err
+            req.user = result.insertId
+            next()
+        })
+    }
+}
+
+exports.login = (role) => {
+    return (req, res, next) => {
+        req.session.regenerate((err) => {
+            if (err) throw err
+            req.session.user = req.user
+            req.session.role = role
+            req.session.save((err) => {
+                if (err) throw err
+                next()
+            })
+        })
+    }
+}
+
+exports.validate = (table) => {
+    return (req, res, next) => {
+        pool.query(`select * from ${table} where email = ? and password = ?`, [req.body.email, req.body.password], (err, result) => {
+            if (err) throw err
+            if (result.length != 0) {
+                req.user = result[0].id
+                next()
+            }
+            else {
+                req.session.failed = true
+                res.redirect(req.originalUrl)
+            }
+        })
+    }
+}
+
+exports.logout = (req, res, next) => {
+    req.session.user = null
+    req.session.save(function (err) {
+        if (err) throw err
+        req.session.regenerate(function (err) {
+            if (err) throw err
+            next()
+        })
+    })
+}

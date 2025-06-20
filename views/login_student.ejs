@@ -41,5 +41,12 @@
             Don't have an account? <a href="/student/register">Register here</a>
         </div>
     </div>
+    <%if (failed) {%>
+    <div class="center">
+        <div class="alert">
+            <p>Wrong password</p>
+        </div>
+    </div>
+    <%}%>
 </body>
 </html>

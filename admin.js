@@ -3,6 +3,8 @@ const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
+const { register, validate, login, logout } = require("./session")
+
 const pool = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -13,61 +15,30 @@ const pool = mysql.createPool({
 })
 
 function isAdmin (req, res, next) {
-    if (req.session.user) next()
+    if (req.session.user && req.session.role == "admin") next()
     else res.redirect("/admin/login") //remember previous page
 }
-
-router.get("/", isAdmin, (req, res) => {
-    pool.query("select * from company where id = ?", [req.session.user], (err, result) => {
-        if (err) throw err
-        res.send("<p>Welcome " + result[0].name + "</p><br><a href=\"/admin/internship\">Internships</a>")
-    })
-})
 
 router.route("/register")
     .get((req, res) => {
         res.render("register_company")
     })
-    .post(express.urlencoded(), (req, res) => {
-        const keys = ["name", "email", "password"]
-        pool.query("insert into company values (null, ?, ?, ?)", keys.map(key => req.body[key]), (err, result) => {
-            if (err) throw err
-            res.redirect("/admin/login") //make autologin
-        })
+    .post(express.urlencoded(), register("company"), login("admin"), (req, res) => {
+        res.redirect("/admin/internship")
     })
 
 router.route("/login")
     .get((req, res) => {
-        res.render("login_company")
+        const failed = req.session.failed
+        req.session.failed = null
+        res.render("login_company", { failed })
     })
-    .post(express.urlencoded(), (req, res) => {
-        pool.query("select * from company where email = ? and password = ?", [req.body.email, req.body.password], (err, result) => {
-            if (err) throw err
-            if (result.length != 0) {
-                req.session.regenerate((err) => {
-                    if (err) throw err
-                    req.session.user = result[0].id
-                    req.session.save((err) => {
-                        if (err) throw err
-                        res.redirect("/admin/internship")
-                    })
-                })
-            }
-            else {
-                res.redirect("/admin/login")
-            }
-        })
+    .post(express.urlencoded(), validate("company"), login("admin"), (req, res) => {
+        res.redirect("/admin/internship")
     })
 
-router.get("/logout", isAdmin, (req, res) => {
-    req.session.user = null
-    req.session.save(function (err) {
-        if (err) throw err
-        req.session.regenerate(function (err) {
-            if (err) throw err
-            res.redirect("/")
-        })
-    })
+router.get("/logout", isAdmin, logout, (req, res) => {
+    res.redirect("/")
 })
 
 router.route("/profile")

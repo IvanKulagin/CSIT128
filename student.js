@@ -25,7 +25,9 @@ function isStudent (req, res, next) {
 
 router.route("/register")
     .get((req, res) => {
-        res.render("register_student")
+        const failed = req.session.failed
+        req.session.failed = null
+        res.render("register_student", { failed })
     })
     .post(express.urlencoded(), register("student"), login("student"), (req, res) => {
         res.redirect("/student/internship")

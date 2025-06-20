@@ -5,7 +5,7 @@ use project;
 create table company(
 	id int auto_increment primary key,
 	name text,
-	email text,
+	email text unique,
 	phone text,
 	address text,
 	description text,
@@ -29,7 +29,7 @@ create table internship (
 create table student (
 	id int auto_increment primary key,
 	name text,
-	email text,
+	email text unique,
 	phone text,
 	university text,
 	major text,

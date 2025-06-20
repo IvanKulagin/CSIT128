@@ -16,9 +16,19 @@ exports.register = (table) => {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
             if (err) throw err
             pool.query(`insert into ${table} (name, email, password) values (?, ?, ?)`, [req.body.name, req.body.email, hash], (err, result) => {
-                if (err) throw err
-                req.user = result.insertId
-                next()
+                if (err) {
+                    if (err.code == "ER_DUP_ENTRY") {
+                        req.session.failed = true
+                        res.redirect(req.originalUrl)
+                    }
+                    else {
+                        throw err
+                    }
+                }
+                else {
+                    req.user = result.insertId
+                    next()
+                }
             })
         })
     }

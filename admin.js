@@ -20,9 +20,35 @@ function isAdmin (req, res, next) {
     else res.redirect("/admin/login") //remember previous page
 }
 
+function internshipOwned (req, res, next) {
+    pool.query("select company_id from internship where id = ?", [req.params.id], (err, result) => {
+        if (err) throw err
+        if (result[0].company_id == req.session.user) {
+            next()
+        }
+        else {
+            res.redirect("/admin/internship")
+        }
+    })
+}
+
+function applicationOwned (req, res, next) {
+    pool.query("select company_id from application join internship on internship_id = internship.id where application.id = ?", [req.params.id], (err, result) => {
+        if (err) throw err
+        if (result[0].company_id == req.session.user) {
+            next()
+        }
+        else {
+            res.redirect("/admin/internship")
+        }
+    })
+}
+
 router.route("/register")
     .get((req, res) => {
-        res.render("register_company")
+        const failed = req.session.failed
+        req.session.failed = null
+        res.render("register_company", { failed })
     })
     .post(express.urlencoded(), register("company"), login("admin"), (req, res) => {
         res.redirect("/admin/internship")
@@ -96,7 +122,7 @@ router.route("/internship/create")
         res.redirect("/admin/internship")
     })
 
-router.get("/internship/:id", isAdmin, (req, res) => {
+router.get("/internship/:id", isAdmin, internshipOwned, (req, res) => {
     pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => { //no check for company_id
         if (err) throw err
         pool.query("select application.*, student.name from application join student on student_id = student.id where internship_id = ?", [req.params.id], (err, applications) => {
@@ -109,7 +135,7 @@ router.get("/internship/:id", isAdmin, (req, res) => {
 })
 
 router.route("/internship/:id/edit")
-    .get(isAdmin, (req, res) => {
+    .get(isAdmin, internshipOwned, (req, res) => {
         pool.query("select * from internship where id = ?", [req.params.id], (err, internship) => { //no check for company_id
             if (err) throw err
             res.render("edit_internship", internship[0])
@@ -123,7 +149,7 @@ router.route("/internship/:id/edit")
         })
     })
 
-router.get("/internship/:id/delete", isAdmin, (req, res) => {
+router.get("/internship/:id/delete", isAdmin, internshipOwned, (req, res) => {
     pool.query("delete from internship where id = ?", [req.params.id], (err, result) => {
         if (err) throw err
         res.redirect("/admin/internship")
@@ -131,7 +157,7 @@ router.get("/internship/:id/delete", isAdmin, (req, res) => {
 })
 
 router.route("/application/:id")
-    .get(isAdmin, (req, res) => {
+    .get(isAdmin, applicationOwned, (req, res) => {
         pool.query("select student.*, cv, filename, about from application join student on student_id = student.id where application.id = ?", [req.params.id], (err, result) => {
             if (err) throw err
             res.render("application", result[0])

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Company Registration</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <script src="/js/password.js" defer></script>
+    <script src="/js/form_validator.js" defer></script>
 </head>
 
 <body>
@@ -51,7 +51,13 @@
         <div class="footer-text">
             Already have an account? <a href="/admin/login">Login here</a>
         </div>
-        <div class="center" id="alert"></div>
+    </div>
+    <div class="center" id="alert">
+    <%if (failed) {%>
+        <div class="alert">
+            <p>Email already registered</p>
+        </div>
+    <%}%>
     </div>
 </body>
 </html>

@@ -101,7 +101,8 @@ router.route("/internship")
     })
 
 router.get("/internship/:id", isStudent, (req, res) => {
-    pool.query("select internship.*, company.name, application.id as application, status from internship join company on company_id = company.id join application on internship.id = internship_id where internship.id = ?", [req.params.id], (err, result) => {
+    pool.query("select internship.*, company.name, application.id as application, status from internship join company on company_id = company.id left join application on internship.id = internship_id where internship.id = ?", [req.params.id], (err, result) => {
+        console.log(result[0])
         res.render("student_internship", result[0])
     })
 })

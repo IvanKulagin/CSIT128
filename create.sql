@@ -50,14 +50,14 @@ create table application (
 	foreign key (internship_id) references internship(id) on delete cascade
 );
 
-insert into company (name, email, password) values ("Company 1", "admin@test.com", "123");
+insert into company (name, email, password) values ("Company 1", "admin@test.com", "$2b$10$evvpvujR8eMihq6CpQn3jOHW/YH1ZD8FemSjlnksmQh5z8zQulcoG");
 insert into company (name) values ("Company 2");
 
 insert into internship values (null, 1, "Test Internship 1", "Dubai", "On-site", "Some skills", 1200.99, 3, "2025-08-01", "Here is a description");
 insert into internship values (null, 2, "Best Internship 2", "Abu Dhabi", "Remote", "Some skills", 500, 6, "2025-08-01", "Here is a description");
 
-insert into student values (null, "John", "user@test.com", "+971..", "Wollongong", "CS", 2, "My bio", "123");
-insert into student values (null, "John", "user2@test.com", "+971..", "Wollongong", "CS", 2, "My bio", "123");
+insert into student values (null, "John", "user@test.com", "+9710501234567", "Wollongong", "CS", 2, "My bio", "$2b$10$evvpvujR8eMihq6CpQn3jOHW/YH1ZD8FemSjlnksmQh5z8zQulcoG");
+insert into student values (null, "John", "user2@test.com", "+9710501234567", "Wollongong", "CS", 2, "My bio", "123");
 
 insert into application values (null, 1, 1, "test.pdf", "cv.pdf", "Description", null);
 insert into application values (null, 1, 2, "test.pdf", "cv.pdf", "Description", null);

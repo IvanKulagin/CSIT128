@@ -1,6 +1,8 @@
-const express = require("express");
-const mysql = require("mysql");
-const router = express.Router();
+const express = require("express")
+const mysql = require("mysql")
+const bcrypt = require("bcrypt")
+
+const router = express.Router()
 
 const { register, validate, login, logout } = require("./session")
 
@@ -48,11 +50,13 @@ router.route("/profile")
         })
     })
     .post(express.urlencoded(), (req, res) => {
-        const keys = ["name", "email", "phone", "address", "description", "password"]
-        pool.query(`update company set ${keys.map(key => `${key} = ?`).join(", ")} where id = ?`, [...keys.map(key => req.body[key]), req.session.user], (err, result) => {
-            if (err) throw err
-            res.redirect("/admin/internship")
-        })
+        const keys = ["name", "email", "phone", "address", "description"]
+        bcrypt.hash(req.body.password, 10, function(err, hash) {
+            pool.query(`update company set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
+                if (err) throw err
+                res.redirect("/admin/internship")
+            })
+        });
     })
 
 

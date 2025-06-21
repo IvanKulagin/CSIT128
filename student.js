@@ -1,15 +1,14 @@
 const express = require("express")
-const formidable = require("formidable")
 const path = require("path")
+const { formidable } = require("formidable")
+
+const { register, validate, login, logout } = require("./session")
+const { pool, update_profile } = require("./database")
 
 const router = express.Router()
 
-const { register, validate, login, logout } = require("./session")
-
-const { pool, update_profile } = require("./mysql")
-
 function isStudent (req, res, next) {
-    if (req.session.user && req.session.role == "student") next()
+    if (req.session.user && req.session.role === "student") next()
     else res.redirect("/student/login")
 }
 
@@ -50,7 +49,7 @@ router.route("/profile")
             res.render("student_profile", { ...result[0], error })
         })
     })
-    .post(express.urlencoded(), update_profile("student", ["name", "email", "phone", "university", "major", "year", "bio"]), (req, res) => {
+    .post(express.urlencoded(), isStudent, update_profile("student", ["name", "email", "phone", "university", "major", "year", "bio"]), (req, res) => {
         res.redirect("/student/internship")
     })
 
@@ -63,7 +62,7 @@ router.route("/internship")
             })
         })
     })
-    .post(express.json(), (req, res) => {
+    .post(express.json(), isStudent, (req, res) => {
         query = "select internship.*, name from internship join company on company_id = company.id where duration <= ? and salary >= ? and "
         params = [req.body.duration, req.body.salary]
         tokens = []
@@ -88,8 +87,7 @@ router.route("/internship")
     })
 
 router.get("/internship/:id", isStudent, (req, res) => {
-    pool.query("select internship.*, company.name, application.id as application, status from internship join company on company_id = company.id left join application on internship.id = internship_id where internship.id = ?", [req.params.id], (err, result) => {
-        console.log(result[0])
+    pool.query("select internship.*, company.name, application.id as application, status from internship join company on company_id = company.id left join (select * from application where student_id = ?) application on internship.id = internship_id where internship.id = ?", [req.session.user, req.params.id], (err, result) => {
         res.render("student_internship", result[0])
     })
 })
@@ -101,8 +99,8 @@ router.route("/internship/:id/apply")
             res.render("create_application", result[0])
         })
     })
-    .post((req, res) => {
-        const form = formidable.formidable({ uploadDir: path.join(__dirname, "uploads") });
+    .post(isStudent, (req, res) => {
+        const form = formidable({ uploadDir: path.join(__dirname, "uploads") });
         form.parse(req, (err, fields, files) => {
             if (err) throw err
             pool.query("insert into application values (null, ?, ?, ?, ?, ?, null)", [req.params.id, req.session.user, files.cv[0].newFilename, files.cv[0].originalFilename, fields.about[0]], (err, result) => {

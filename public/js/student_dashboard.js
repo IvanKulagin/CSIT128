@@ -27,16 +27,6 @@ function search() {
                         <p><strong>Duration:</strong> ${element.duration} Month(s)</p>
                     </div>
                 </a>`
-                /*
-                div.innerHTML += element.title + " "
-                if (element.application !== null) {
-                    div.innerHTML += element.status !== null ? element.status : "On review"
-                }
-                else {
-                    div.innerHTML += `<a href="/student/internship/${element.id}">Apply</a>`
-                }
-                div.innerHTML += "<br>"
-                */
             })
         })
 }
@@ -44,6 +34,7 @@ document.addEventListener("DOMContentLoaded", search)
 document.getElementById("searchInput").addEventListener("input", search)
 Array.from(document.querySelectorAll("#company input"), item => item.addEventListener("change", search))
 Array.from(document.querySelectorAll("#type input"), item => item.addEventListener("change", search))
+document.getElementById("salary").addEventListener("input", search)
 document.getElementById("duration").addEventListener("input", search)
 document.getElementById("duration").addEventListener("input", (event) => {
     document.getElementById("durationValue").innerHTML = event.target.value

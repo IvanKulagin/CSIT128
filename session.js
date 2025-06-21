@@ -1,7 +1,8 @@
 const express = require("express")
 const mysql = require("mysql")
 const bcrypt = require("bcrypt")
-const { pool } = require("./mysql")
+
+const { pool } = require("./database")
 
 function register(table) {
     return (req, res, next) => {
@@ -9,7 +10,7 @@ function register(table) {
             if (err) throw err
             pool.query(`select * from ${table} where name = ?`, [req.body.name], (err, result) => {
                 if (err) throw err
-                if (table != "student" && result.length != 0) {
+                if (table !== "student" && result.length !== 0) {
                     req.session.error = "Name already exists"
                     res.redirect(req.originalUrl)
                 }

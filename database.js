@@ -1,5 +1,6 @@
 const mysql = require("mysql")
 const bcrypt = require("bcrypt")
+require("dotenv").config()
 
 const pool = mysql.createPool({
     host: "localhost",
@@ -15,7 +16,7 @@ function update_profile(table, keys) {
     return (req, res, next) => {
         pool.query(`select * from ${table} where name = ? and id != ?`, [req.body.name, req.session.user], (err, result) => {
             if (err) throw err
-            if (table == "company" && result.length > 0) {
+            if (table === "company" && result.length > 0) {
                 req.session.error = "Name already exists"
                 res.redirect(req.originalUrl)
             }
@@ -27,12 +28,20 @@ function update_profile(table, keys) {
                         res.redirect(req.originalUrl)
                     }
                     else {
-                        bcrypt.hash(req.body.password, 10, function(err, hash) {
-                            pool.query(`update ${table} set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key]), hash, req.session.user], (err, result) => {
+                        if (req.body.password === "") {
+                            pool.query(`update ${table} set ${keys.map(key => `${key} = ?`).join(", ")} where id = ?`, [...keys.map(key => req.body[key] === "" ? null : req.body[key]), req.session.user], (err, result) => {
                                 if (err) throw err
                                 next()
                             })
-                        });
+                        }
+                        else {
+                            bcrypt.hash(req.body.password, 10, function(err, hash) {
+                                pool.query(`update ${table} set ${keys.map(key => `${key} = ?`).join(", ")}, password = ? where id = ?`, [...keys.map(key => req.body[key] === "" ? null : req.body[key]), hash, req.session.user], (err, result) => {
+                                    if (err) throw err
+                                    next()
+                                })
+                            });
+                        }
                     }
                 })
             }

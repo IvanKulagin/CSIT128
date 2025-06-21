@@ -38,8 +38,8 @@
             <div class="form-group">
                 <label for="type">Type</label>
                 <select id="type" name="type" required>
-                    <option value="Remote" <% if (location == "Remote") {%>selected<%}%>>Remote</option>
-                    <option value="On-site" <% if (location == "On-site") {%>selected<%}%>>On-site</option>
+                    <option value="Remote" <% if (location === "Remote") {%>selected<%}%>>Remote</option>
+                    <option value="On-site" <% if (location === "On-site") {%>selected<%}%>>On-site</option>
                 </select>
             </div>
 

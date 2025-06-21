@@ -18,12 +18,12 @@ con.changeUser({ database: 'project' }, function(err) {
 
 con.query(`create table if not exists company (
     id int auto_increment primary key,
-    name text not null,
-    email text not null unique,
-    phone text,
+    name varchar(255) not null,
+    email varchar(255) not null unique,
+    phone varchar(255),
     address text,
     description text,
-    password text
+    password varchar(255)
 );`, (err, result) => {
     if (err) throw err
     console.log("Table 'company' created")
@@ -32,10 +32,10 @@ con.query(`create table if not exists company (
 con.query(`create table if not exists internship (
     id int auto_increment primary key,
     company_id int,
-    title text,
-    location text,
+    title varchar(255),
+    location varchar(255),
     type enum("Remote", "On-site"),
-    skills text,
+    skills varchar(255),
     salary decimal(10, 2),
     duration int,
     deadline date,
@@ -48,14 +48,14 @@ con.query(`create table if not exists internship (
 
 con.query(`create table if not exists student (
     id int auto_increment primary key,
-    name text not null,
-    email text not null unique,
-    phone text,
-    university text,
-    major text,
+    name varchar(255) not null,
+    email varchar(255) not null unique,
+    phone varchar(255),
+    university varchar(255),
+    major varchar(255),
     year int,
     bio text,
-    password text
+    password varchar(255)
 );`, (err, result) => {
     if (err) throw err
     console.log("Table 'student' created")
@@ -65,8 +65,8 @@ con.query(`create table if not exists application (
     id int auto_increment primary key,
     internship_id int,
     student_id int,
-    cv text,
-    filename text,
+    cv varchar(255),
+    filename varchar(255),
     about text,
     status enum("Accepted", "Rejected", "Shortlisted"),
     foreign key (student_id) references student(id),

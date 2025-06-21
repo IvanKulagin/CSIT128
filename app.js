@@ -1,6 +1,7 @@
 const express = require("express")
 const session = require("express-session")
 const path = require("path")
+require("dotenv").config()
 
 const admin = require("./admin")
 const student = require("./student")
@@ -10,7 +11,7 @@ const app = express()
 app.set("view engine", "ejs")
 
 app.use(session({
-    secret: "keyboard cat",
+    secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true
 }))
